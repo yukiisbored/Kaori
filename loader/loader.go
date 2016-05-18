@@ -15,10 +15,13 @@ var frameStart, frameTime uint32
 
 func main() {
 	log.Println("Welcome to Kaori")
+	defer log.Println("Goodbye o/")
 
 	log.Printf("Compiled with %s for %s %s\n", runtime.Compiler, runtime.GOOS, runtime.GOARCH)
 
 	game.Init("Kaori", sdl.WINDOWPOS_CENTERED, sdl.WINDOWPOS_CENTERED, 800, 600, false)
+
+	defer game.Clean()
 
 	for game.Running() {
 		frameStart = sdl.GetTicks()
@@ -33,8 +36,4 @@ func main() {
 			sdl.Delay(DELAY_TIME - frameTime)
 		}
 	}
-
-	game.Clean()
-
-	log.Println("Goodbye o/")
 }
