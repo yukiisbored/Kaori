@@ -57,19 +57,19 @@ func HandleEvents(e sdl.Event) {
 	}
 }
 
-func GetAxis(id sdl.JoystickID, axis uint) int16 {
+func Axis(id sdl.JoystickID, axis uint) int16 {
 	return joystickAxises[id][axis]
 }
 
-func GetAxisf(id sdl.JoystickID, axis uint) float32 {
-	return float32(GetAxis(id, axis)) / 65536
+func Axisf(id sdl.JoystickID, axis uint) float32 {
+	return float32(Axis(id, axis)) / 65536
 }
 
-func GetButton(id sdl.JoystickID, button uint) bool {
+func Button(id sdl.JoystickID, button uint) bool {
 	return joystickButtons[id][button]
 }
 
-func GetHat(id sdl.JoystickID, hat uint) uint8 {
+func Hat(id sdl.JoystickID, hat uint) uint8 {
 	return joystickHats[id][hat]
 }
 
