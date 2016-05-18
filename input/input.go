@@ -73,6 +73,12 @@ func GetHat(id sdl.JoystickID, hat uint) uint8 {
 	return joystickHats[id][hat]
 }
 
+func Clean() {
+	for k := range joysticks {
+		remJoystick(k)
+	}
+}
+
 func addJoystick(id sdl.JoystickID) {
 	if joy := sdl.JoystickOpen(id); joy != nil {
 		id = joy.InstanceID()

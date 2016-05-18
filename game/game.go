@@ -96,6 +96,7 @@ func Clean() {
 
 	currentScene.Exit()
 	texture.Clean()
+	input.Clean()
 	renderer.Destroy()
 	window.Destroy()
 }
