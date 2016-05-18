@@ -1,9 +1,12 @@
-package scene
+package game
 
-import "github.com/veandco/go-sdl2/sdl"
+import (
+	"github.com/veandco/go-sdl2/sdl"
+	"github.com/yukiisbored/Kaori/scene"
+)
 
 type EmptyScene struct {
-	Scene
+	scene.Scene
 }
 
 func (s EmptyScene) Enter() {

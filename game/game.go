@@ -15,7 +15,7 @@ var (
 
 	running bool
 
-	currentScene scene.Scene = scene.EmptyScene{}
+	currentScene scene.Scene = EmptyScene{}
 )
 
 func Init(title string, xpos, ypos, height, width int, fullscreen bool) {
