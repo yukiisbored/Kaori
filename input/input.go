@@ -4,14 +4,35 @@ import (
 	"log"
 
 	"github.com/veandco/go-sdl2/sdl"
+	"github.com/yukiisbored/Kaori/common"
 )
 
 var (
+	// Joystick
 	joysticks            map[sdl.JoystickID]*sdl.Joystick = make(map[sdl.JoystickID]*sdl.Joystick)
 	joystickAxises       map[sdl.JoystickID][]int16       = make(map[sdl.JoystickID][]int16)
 	joystickButtons      map[sdl.JoystickID][]bool        = make(map[sdl.JoystickID][]bool)
 	joystickHats         map[sdl.JoystickID][]uint8       = make(map[sdl.JoystickID][]uint8)
 	joysticksInitialised bool
+
+	// Mouse
+	mouseLocation common.Vector2D = common.Vector2D{0, 0}
+	mouseState    []bool          = make([]bool, 3)
+)
+
+const (
+	MOUSE_LEFT   = 0
+	MOUSE_MIDDLE = 1
+	MOUSE_RIGHT  = 2
+
+	JOYSTICK_HAT_N  = 1
+	JOYSTICK_HAT_NE = 3
+	JOYSTICK_HAT_E  = 2
+	JOYSTICK_HAT_SE = 6
+	JOYSTICK_HAT_S  = 4
+	JOYSTICK_HAT_SW = 9
+	JOYSTICK_HAT_W  = 8
+	JOYSTICK_HAT_NW = 12
 )
 
 func Init() {
@@ -54,6 +75,37 @@ func HandleEvents(e sdl.Event) {
 	case *sdl.JoyHatEvent:
 		joystickHats[t.Which][t.Hat] = t.Value
 		break
+	case *sdl.MouseMotionEvent:
+		mouseLocation.X = float64(t.X)
+		mouseLocation.Y = float64(t.Y)
+		break
+	case *sdl.MouseButtonEvent:
+		if t.Type == sdl.MOUSEBUTTONDOWN {
+			if t.Button == sdl.BUTTON_LEFT {
+				mouseState[MOUSE_LEFT] = true
+			}
+
+			if t.Button == sdl.BUTTON_MIDDLE {
+				mouseState[MOUSE_MIDDLE] = true
+			}
+
+			if t.Button == sdl.BUTTON_RIGHT {
+				mouseState[MOUSE_RIGHT] = true
+			}
+		} else {
+			if t.Button == sdl.BUTTON_LEFT {
+				mouseState[MOUSE_LEFT] = false
+			}
+
+			if t.Button == sdl.BUTTON_MIDDLE {
+				mouseState[MOUSE_MIDDLE] = false
+			}
+
+			if t.Button == sdl.BUTTON_RIGHT {
+				mouseState[MOUSE_RIGHT] = false
+			}
+		}
+		break
 	}
 }
 
@@ -71,6 +123,24 @@ func Button(id sdl.JoystickID, button uint) bool {
 
 func Hat(id sdl.JoystickID, hat uint) uint8 {
 	return joystickHats[id][hat]
+}
+
+func MouseLocation() common.Vector2D {
+	return mouseLocation
+}
+
+func Mouse(button uint8) bool {
+	return mouseState[button]
+}
+
+func Key(key sdl.Scancode) bool {
+	keyState := sdl.GetKeyboardState()
+
+	if keyState[key] == 1 {
+		return true
+	} else {
+		return false
+	}
 }
 
 func Clean() {
