@@ -3,8 +3,14 @@ language: go
 go:
   - tip
 
-before_install:
-  - sudo apt-get install -qq libsdl2-dev libsdl2-mixer-dev libsdl2-image-dev libsdl2-ttf-dev
-
 install:
+  - cd ~
+  - mkdir sdl2install
+  - export SDL2DIR="`pwd`/sdl2install"
+  - wget https://www.libsdl.org/release/SDL2-2.0.3.tar.gz
+  - tar xzf SDL2-2.0.3.tar.gz
+  - cd SDL2-2.0.3
+  - ./configure --prefix=$SDL2DIR
+  - make
+  - make install
   - go get github.com/veandco/go-sdl2
