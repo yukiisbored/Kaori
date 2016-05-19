@@ -59,6 +59,8 @@ func Init(title string, xpos, ypos, height, width int, fullscreen bool) {
 	window = w
 	renderer = r
 
+	input.Init()
+
 	running = true
 
 	currentScene.Enter()
