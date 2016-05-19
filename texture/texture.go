@@ -5,7 +5,7 @@ import (
 	"github.com/veandco/go-sdl2/sdl_image"
 )
 
-var textureMap map[string]*sdl.Texture
+var textureMap map[string]*sdl.Texture = make(map[string]*sdl.Texture)
 
 func Load(renderer *sdl.Renderer, fileName, id string) error {
 	tempSurface, err := img.Load(fileName)
@@ -27,18 +27,18 @@ func Load(renderer *sdl.Renderer, fileName, id string) error {
 	return nil
 }
 
-func Draw(renderer *sdl.Renderer, id string, x, y, width, height int32, flip sdl.RendererFlip) {
+func Draw(renderer *sdl.Renderer, id string, x, y, width, height int32, angle float64, flip sdl.RendererFlip) {
 	src := sdl.Rect{0, 0, width, height}
 	dst := sdl.Rect{x, y, width, height}
 
-	renderer.CopyEx(textureMap[id], &src, &dst, 0, nil, flip)
+	renderer.CopyEx(textureMap[id], &src, &dst, angle, nil, flip)
 }
 
-func DrawFrame(renderer *sdl.Renderer, id string, x, y, width, height, currentRow, currentFrame int32, flip sdl.RendererFlip) {
+func DrawFrame(renderer *sdl.Renderer, id string, x, y, width, height, currentRow, currentFrame int32, angle float64, flip sdl.RendererFlip) {
 	src := sdl.Rect{width * currentFrame, height * (currentRow - 1), width, height}
 	dst := sdl.Rect{x, y, width, height}
 
-	renderer.CopyEx(textureMap[id], &src, &dst, 0, nil, flip)
+	renderer.CopyEx(textureMap[id], &src, &dst, angle, nil, flip)
 }
 
 func Free(id string) {

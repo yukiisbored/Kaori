@@ -15,10 +15,12 @@ var (
 
 	running bool
 
-	currentScene scene.Scene = EmptyScene{}
+	currentScene scene.Scene = DemoScene{}
+
+	tick int
 )
 
-func Init(title string, xpos, ypos, height, width int, fullscreen bool) {
+func Init(title string, x, y, width, height int, fullscreen bool) {
 	var flags uint32
 
 	if fullscreen {
@@ -34,7 +36,7 @@ func Init(title string, xpos, ypos, height, width int, fullscreen bool) {
 
 	log.Println("Game // SDL Initialised")
 
-	w, err := sdl.CreateWindow(title, xpos, ypos, height, width, flags)
+	win, err := sdl.CreateWindow(title, x, y, width, height, flags)
 
 	if err != nil {
 		log.Fatalln("Game // Error while creating window")
@@ -43,21 +45,21 @@ func Init(title string, xpos, ypos, height, width int, fullscreen bool) {
 
 	log.Println("Game // Created Window")
 
-	r, err := sdl.CreateRenderer(w, -1, 0)
+	ren, err := sdl.CreateRenderer(win, -1, 0)
 
 	if err != nil {
 		log.Fatalln("Game // Error while creating renderer")
 		log.Panic(err)
 	}
 
-	r.SetDrawColor(0, 0, 0, 0)
+	ren.SetDrawColor(255, 255, 255, 255)
 
 	log.Println("Game // Created Renderer")
 
 	log.Println("Game // Init Success")
 
-	window = w
-	renderer = r
+	window = win
+	renderer = ren
 
 	input.Init()
 
@@ -75,6 +77,8 @@ func Render() {
 }
 
 func Update() {
+	tick++
+
 	currentScene.Update()
 }
 
@@ -105,6 +109,10 @@ func Clean() {
 
 func Running() bool {
 	return running
+}
+
+func Window() *sdl.Window {
+	return window
 }
 
 func Renderer() *sdl.Renderer {
