@@ -101,7 +101,9 @@ func Marshal(tilemap Map) ([]byte, error) {
 }
 
 func (l *Layer) Read() error {
-	raw := l.Data.Data
+	// Tile Maps are weird
+	// Horrible.
+	raw := l.Data.Data[0:len(l.Data.Data)-1] + ","
 
 	rdr := csv.NewReader(strings.NewReader(raw))
 
@@ -116,9 +118,14 @@ func (l *Layer) Read() error {
 	l.Tiles = make([][]int, len(records))
 
 	for i, row := range records {
-		l.Tiles[i] = make([]int, len(records[i]))
+		l.Tiles[i] = make([]int, len(records[i])-1)
 
 		for j, col := range row {
+			// I hate this thing, but it's the only thing I can think of right now
+			if j == len(records[i])-1 {
+				break
+			}
+
 			tile, err := strconv.Atoi(col)
 
 			if err != nil {
