@@ -133,7 +133,7 @@ func (l *Layer) Read() error {
 			tile, err := strconv.Atoi(col)
 
 			if err != nil {
-				return nil
+				return err
 			}
 
 			l.Tiles[i][j] = tile
