@@ -90,7 +90,11 @@ func Unmarshal(data []byte, tilemap *Map) error {
 	err := xml.Unmarshal(data, tilemap)
 
 	for _, l := range tilemap.Layers {
-		l.Read()
+		err := l.Read()
+
+		if err != nil {
+			return err
+		}
 	}
 
 	return err
