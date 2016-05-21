@@ -1,6 +1,11 @@
 package tilemap
 
-import "encoding/xml"
+import (
+	"encoding/csv"
+	"encoding/xml"
+	"strconv"
+	"strings"
+)
 
 type Map struct {
 	XMLName xml.Name `xml:"map"`
@@ -14,10 +19,10 @@ type Map struct {
 	TileWidth  int `xml:"tilewidth,attr"`
 	TileHeight int `xml:"tileheight,attr"`
 
-	Tilesets []Tileset `xml:"tileset"`
+	Tilesets []*Tileset `xml:"tileset"`
 
-	Layers       []Layer       `xml:"layer"`
-	ObjectGroups []ObjectGroup `xml:"objectgroup"`
+	Layers       []*Layer       `xml:"layer"`
+	ObjectGroups []*ObjectGroup `xml:"objectgroup"`
 }
 
 type Tileset struct {
@@ -48,7 +53,7 @@ type Layer struct {
 
 	Data Data `xml:"data"`
 
-	Tiles []int
+	Tiles [][]int
 }
 
 type Data struct {
@@ -59,8 +64,8 @@ type Data struct {
 }
 
 type ObjectGroup struct {
-	Name    string   `xml:"name,attr"`
-	Objects []Object `xml:"object"`
+	Name    string    `xml:"name,attr"`
+	Objects []*Object `xml:"object"`
 }
 
 type Object struct {
@@ -82,9 +87,47 @@ type Polyline struct {
 }
 
 func Unmarshal(data []byte, tilemap *Map) error {
-	return xml.Unmarshal(data, tilemap)
+	err := xml.Unmarshal(data, tilemap)
+
+	for _, l := range tilemap.Layers {
+		l.Read()
+	}
+
+	return err
 }
 
 func Marshal(tilemap Map) ([]byte, error) {
 	return xml.Marshal(tilemap)
+}
+
+func (l *Layer) Read() error {
+	raw := l.Data.Data
+
+	rdr := csv.NewReader(strings.NewReader(raw))
+
+	rdr.TrimLeadingSpace = true
+
+	records, err := rdr.ReadAll()
+
+	if err != nil {
+		return err
+	}
+
+	l.Tiles = make([][]int, len(records))
+
+	for i, row := range records {
+		l.Tiles[i] = make([]int, len(records[i]))
+
+		for j, col := range row {
+			tile, err := strconv.Atoi(col)
+
+			if err != nil {
+				return nil
+			}
+
+			l.Tiles[i][j] = tile
+		}
+	}
+
+	return nil
 }
