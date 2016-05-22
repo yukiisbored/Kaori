@@ -9,7 +9,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/yukiisbored/Kaori/blob/master/LICENSE)
 
 ## What is this?
-This is a Game Framework I wrote with Go. I created to fill my time and probably for my games in the future.
+This is a Game Framework I wrote with Go. I created it to fill my time and probably for my games in the future.
 
 ## Why Go?
 I love Go. Go is the best programming language I've ever learned. If you want to know more, [Read my blog post](https://yukiisbored.tumblr.com/post/144328019233/why-the-go-programming-language-is-the-best-modern)
