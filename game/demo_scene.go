@@ -44,9 +44,6 @@ func (s *DemoScene) Draw(r *sdl.Renderer) {
 func (s *DemoScene) HandleEvents(e sdl.Event) {
 }
 
-func (s *DemoScene) Clean() {
-}
-
 func (s *DemoScene) Exit() {
 	log.Println("Demo // Freeing Texture")
 	texture.Free("kaori")

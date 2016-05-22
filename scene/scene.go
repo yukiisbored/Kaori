@@ -9,5 +9,4 @@ type Scene interface {
 	common.Updater
 	common.Drawer
 	common.EventHandler
-	common.Cleaner
 }
