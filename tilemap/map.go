@@ -1,8 +1,12 @@
 package tilemap
 
 import (
+	"bytes"
+	"compress/zlib"
+	"encoding/base64"
 	"encoding/csv"
 	"encoding/xml"
+	"io/ioutil"
 	"strconv"
 	"strings"
 
@@ -57,7 +61,7 @@ type Layer struct {
 	Spacing int `xml:"spacing,attr"`
 	Margin  int `xml:"margin,attr"`
 
-	Data Data `xml:"data"`
+	Data *Data `xml:"data"`
 
 	Tiles [][]int
 }
@@ -122,6 +126,34 @@ func (t *Tileset) Free() {
 }
 
 func (l *Layer) Read() error {
+	if l.Data.Compression == "zlib" {
+		b := bytes.NewReader([]byte(l.Data.Data))
+
+		r, err := zlib.NewReader(b)
+
+		if err != nil {
+			return err
+		}
+
+		bytes, err := ioutil.ReadAll(r)
+
+		if err != nil {
+			return err
+		}
+
+		l.Data.Data = string(bytes)
+	}
+
+	if l.Data.Encoding == "base64" {
+		dec, err := base64.StdEncoding.DecodeString(l.Data.Data)
+
+		if err != nil {
+			return err
+		}
+
+		l.Data.Data = string(dec)
+	}
+
 	// Tile Maps are weird
 	// Horrible.
 	raw := l.Data.Data[0:len(l.Data.Data)-1] + ","
