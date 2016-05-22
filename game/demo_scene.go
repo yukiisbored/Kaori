@@ -4,15 +4,13 @@ import (
 	"log"
 
 	"github.com/veandco/go-sdl2/sdl"
-	"github.com/yukiisbored/Kaori/scene"
 	"github.com/yukiisbored/Kaori/texture"
 )
 
 type DemoScene struct {
-	scene.Scene
 }
 
-func (s DemoScene) Enter() {
+func (s *DemoScene) Enter() {
 	log.Println("Demo // Welcome to Kaori's Demo Scene!")
 	log.Println("Demo // Loading Logo as Texture ...")
 
@@ -24,10 +22,10 @@ func (s DemoScene) Enter() {
 	}
 }
 
-func (s DemoScene) Update() {
+func (s *DemoScene) Update() {
 }
 
-func (s DemoScene) Draw(r *sdl.Renderer) {
+func (s *DemoScene) Draw(r *sdl.Renderer) {
 	w, h := window.GetSize()
 
 	xLogo := tick * 4 % w
@@ -43,10 +41,10 @@ func (s DemoScene) Draw(r *sdl.Renderer) {
 		474, 167, float64(360-rot), sdl.FLIP_NONE)
 }
 
-func (s DemoScene) HandleEvents(e sdl.Event) {
+func (s *DemoScene) HandleEvents(e sdl.Event) {
 }
 
-func (s DemoScene) Exit() {
+func (s *DemoScene) Exit() {
 	log.Println("Demo // Freeing Texture")
 	texture.Free("kaori")
 	log.Println("Demo // Bye :(")

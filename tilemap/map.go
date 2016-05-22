@@ -106,7 +106,7 @@ func Unmarshal(data []byte, tilemap *Map) error {
 	return err
 }
 
-func Marshal(tilemap Map) ([]byte, error) {
+func Marshal(tilemap *Map) ([]byte, error) {
 	return xml.Marshal(tilemap)
 }
 

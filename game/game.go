@@ -15,7 +15,7 @@ var (
 
 	running bool
 
-	currentScene scene.Scene = DemoScene{}
+	currentScene scene.Scene = &DemoScene{}
 
 	tick int
 )

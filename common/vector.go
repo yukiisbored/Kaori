@@ -35,6 +35,6 @@ func (v *Vector2D) Normalize() {
 	}
 }
 
-func (v Vector2D) Length() float64 {
+func (v *Vector2D) Length() float64 {
 	return math.Sqrt(math.Pow(v.X, 2) + math.Pow(v.Y, 2))
 }
