@@ -54,6 +54,9 @@ type Layer struct {
 	Width  int `xml:"width,attr"`
 	Height int `xml:"height,attr"`
 
+	Spacing int `xml:"spacing,attr"`
+	Margin  int `xml:"margin,attr"`
+
 	Data Data `xml:"data"`
 
 	Tiles [][]int
@@ -112,6 +115,10 @@ func (t *Tileset) Load(renderer *sdl.Renderer, folder string) error {
 	path := folder + "/" + fileName
 
 	return texture.Load(renderer, path, t.Name)
+}
+
+func (t *Tileset) Free() {
+	texture.Free(t.Name)
 }
 
 func (l *Layer) Read() error {
