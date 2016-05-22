@@ -34,8 +34,8 @@ func Draw(renderer *sdl.Renderer, id string, x, y, width, height int32, angle fl
 	renderer.CopyEx(textureMap[id], &src, &dst, angle, nil, flip)
 }
 
-func DrawFrame(renderer *sdl.Renderer, id string, x, y, width, height, currentRow, currentFrame int32, angle float64, flip sdl.RendererFlip) {
-	src := sdl.Rect{width * currentFrame, height * (currentRow - 1), width, height}
+func DrawFrame(renderer *sdl.Renderer, id string, x, y, width, height, currentRow, currentFrame, spacing, margin int32, angle float64, flip sdl.RendererFlip) {
+	src := sdl.Rect{margin + spacing*currentFrame + width*currentFrame, margin + height*(currentRow-1), width, height}
 	dst := sdl.Rect{x, y, width, height}
 
 	renderer.CopyEx(textureMap[id], &src, &dst, angle, nil, flip)
