@@ -28,7 +28,7 @@ Want to suggest a Feature? Want to correct my mistake? Do you think my code is h
 * Telegram: [@yuki\_is\_bored](https://telegram.me/yuki_is_bored)
 
 ## Disclaimer
-English is **not** my native language and I'm sorry If there's a grammar error. I **don't** consider this as a "high-priority" project and because I'm a Senior High Student, I can **only** code on my free time. I **dont** conside myself as a "professional" and neither should you. I made this project just because I can and for the sake of anti-boredom.
+English is **not** my native language and I'm sorry If there's a grammar error. I **don't** consider this as a "high-priority" project and because I'm a Senior High Student, I can **only** code on my free time. I **dont** consider myself as a "professional" and neither should you. I made this project just because I can and for the sake of anti-boredom.
 
 Thanks,
 yuki\_is\_bored
