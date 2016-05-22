@@ -5,6 +5,9 @@ import (
 	"encoding/xml"
 	"strconv"
 	"strings"
+
+	"github.com/veandco/go-sdl2/sdl"
+	"github.com/yukiisbored/Kaori/texture"
 )
 
 type Map struct {
@@ -102,6 +105,13 @@ func Unmarshal(data []byte, tilemap *Map) error {
 
 func Marshal(tilemap Map) ([]byte, error) {
 	return xml.Marshal(tilemap)
+}
+
+func (t *Tileset) Load(renderer *sdl.Renderer, folder string) error {
+	fileName := t.Image.Source
+	path := folder + "/" + fileName
+
+	return texture.Load(renderer, path, t.Name)
 }
 
 func (l *Layer) Read() error {
