@@ -1,12 +1,6 @@
 <div align="center">
 	<img src="https://raw.githubusercontent.com/yukiisbored/Kaori/master/assets/kaori.png">
 </div>
-<p align="center">
-	<sup>
-		A game framework written in Go that focuses on flexibility, simplicity, and modularity
-	</sup>
-</p>
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/yukiisbored/Kaori/blob/master/LICENSE)
 
 ## What is this?
 This is a game framework that I wrote in Go. It focuses on flexibility, simplicity, and modularity. Kaori is made to be free of rigid laws and rules that most game engines / frameworks has and gives programmers the freedom to form the structure of the game to whatever they want.
