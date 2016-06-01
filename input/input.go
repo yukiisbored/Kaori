@@ -3,8 +3,8 @@ package input
 import (
 	"log"
 
+	"github.com/ungerik/go3d/vec2"
 	"github.com/veandco/go-sdl2/sdl"
-	"github.com/yukiisbored/Kaori/common"
 )
 
 var (
@@ -16,8 +16,8 @@ var (
 	joysticksInitialised bool
 
 	// Mouse
-	mouseLocation common.Vector2D = common.Vector2D{0, 0}
-	mouseState    []bool          = make([]bool, 3)
+	mouseLocation vec2.T = vec2.Zero
+	mouseState    []bool = make([]bool, 3)
 )
 
 const (
@@ -76,8 +76,8 @@ func HandleEvents(e sdl.Event) {
 		joystickHats[t.Which][t.Hat] = t.Value
 		break
 	case *sdl.MouseMotionEvent:
-		mouseLocation.X = float64(t.X)
-		mouseLocation.Y = float64(t.Y)
+		mouseLocation[0] = float32(t.X)
+		mouseLocation[1] = float32(t.Y)
 		break
 	case *sdl.MouseButtonEvent:
 		if t.Type == sdl.MOUSEBUTTONDOWN {
@@ -125,7 +125,7 @@ func Hat(id sdl.JoystickID, hat uint) uint8 {
 	return joystickHats[id][hat]
 }
 
-func MouseLocation() common.Vector2D {
+func MouseLocation() vec2.T {
 	return mouseLocation
 }
 
