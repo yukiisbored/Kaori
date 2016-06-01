@@ -1,3 +1,6 @@
+// Package game provides an example of a usual Kaori game skeleton.
+// Everything that are specific to the game should and only be in
+// this class only.
 package game
 
 import (
@@ -17,9 +20,11 @@ var (
 
 	currentScene scene.Scene = &DemoScene{}
 
-	tick int
+	tick int // How many ticks has passed since the game was launched.
 )
 
+// Init is used for a starting procedure of the game which will do things
+// such as creating the SDL Window, creating the SDL Renderer, Start the Scene, etc.
 func Init(title string, x, y, width, height int, fullscreen bool) {
 	var flags uint32
 
@@ -68,6 +73,8 @@ func Init(title string, x, y, width, height int, fullscreen bool) {
 	currentScene.Enter()
 }
 
+// Render is used for drawing something to the renderer. Which will show
+// up on the screen.
 func Render() {
 	renderer.Clear()
 
@@ -76,12 +83,16 @@ func Render() {
 	renderer.Present()
 }
 
+// Update is used to update and tick the game's component such as
+// Moving the enemy, Update the score, Do physics, etc.
 func Update() {
 	tick++
 
 	currentScene.Update()
 }
 
+// HandleEvents is used for receiving and handling SDL Events such as
+// Update the mouse location, Check if the user is requesting to close the game, etc.
 func HandleEvents() {
 	event := sdl.PollEvent()
 
@@ -97,6 +108,8 @@ func HandleEvents() {
 	}
 }
 
+// Clean is used for cleaning the game's resources such as
+// Freeing the Textures, Clean the used resources, etc.
 func Clean() {
 	log.Println("Game // Cleaning up ...")
 
@@ -107,22 +120,28 @@ func Clean() {
 	window.Destroy()
 }
 
+// Running returns the game's 'running' status.
 func Running() bool {
 	return running
 }
 
+// Window returns the SDL Window that's being used.
 func Window() *sdl.Window {
 	return window
 }
 
+// Renderer returns the SDL Renderer that's being used for the Window.
 func Renderer() *sdl.Renderer {
 	return renderer
 }
 
+// Stop literally stops the game
 func Stop() {
 	running = false
 }
 
+// ChangeScene changes the scene and runs the proper functions
+// ( Run Exit on Old Scene, and Enter on New Scene )
 func ChangeScene(s scene.Scene) {
 	currentScene.Exit()
 	currentScene = s

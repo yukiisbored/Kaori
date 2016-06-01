@@ -7,13 +7,16 @@ import (
 	"github.com/yukiisbored/Kaori/texture"
 )
 
+// Demo Scene is an example use of a Scene in this case drawing the logo
 type DemoScene struct {
 }
 
 func (s *DemoScene) Enter() {
+	// Show a warm welomce message
 	log.Println("Demo // Welcome to Kaori's Demo Scene!")
 	log.Println("Demo // Loading Logo as Texture ...")
 
+	// Load the logo as a texture using Kaori's texture module
 	err := texture.Load(renderer, "./assets/kaori.png", "kaori")
 
 	if err != nil {
@@ -23,15 +26,22 @@ func (s *DemoScene) Enter() {
 }
 
 func (s *DemoScene) Update() {
+	// Since this scene doesn't have user interaction at all we leave this empty
 }
 
 func (s *DemoScene) Draw(r *sdl.Renderer) {
+	// Get the current size of the window
 	w, h := window.GetSize()
 
+	// Move the logo relatively to how long it's been running
+	// but don't move outisde the window
 	xLogo := tick * 4 % w
 	yLogo := tick * 4 % h
+
+	// Rotate the logo relatively to how long it's been running
 	rot := tick * 4 % 360
 
+	// Draw the logos!
 	texture.Draw(renderer, "kaori",
 		int32(xLogo), int32(yLogo),
 		474, 167, float64(rot), sdl.FLIP_NONE)
@@ -46,6 +56,9 @@ func (s *DemoScene) HandleEvents(e sdl.Event) {
 
 func (s *DemoScene) Exit() {
 	log.Println("Demo // Freeing Texture")
+
+	// Free the logo texture
 	texture.Free("kaori")
+
 	log.Println("Demo // Bye :(")
 }
