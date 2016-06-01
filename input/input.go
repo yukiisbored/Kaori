@@ -21,10 +21,12 @@ var (
 )
 
 const (
+	// Constants for Mouse buttons
 	MOUSE_LEFT   = 0
 	MOUSE_MIDDLE = 1
 	MOUSE_RIGHT  = 2
 
+	// Constants for Joystick Hat positions
 	JOYSTICK_HAT_N  = 1
 	JOYSTICK_HAT_NE = 3
 	JOYSTICK_HAT_E  = 2
@@ -35,6 +37,7 @@ const (
 	JOYSTICK_HAT_NW = 12
 )
 
+// Init initializes the Joystick Subsystem and add available joysticks
 func Init() {
 	if sdl.WasInit(sdl.INIT_JOYSTICK) == 0 {
 		sdl.InitSubSystem(sdl.INIT_JOYSTICK)
@@ -53,6 +56,8 @@ func Init() {
 	}
 }
 
+// HandleEvents handles input device specific events
+// like keyboard input, mouse input, and joystick input
 func HandleEvents(e sdl.Event) {
 	switch t := e.(type) {
 	case *sdl.JoyDeviceEvent:
@@ -109,30 +114,41 @@ func HandleEvents(e sdl.Event) {
 	}
 }
 
+// Axis returns the Axis value for a certain Joystick's Axis.
+// The returned value is a int16 number usually to show how 'full' the analog trigger are pressed or how far the stick has gone
 func Axis(id sdl.JoystickID, axis uint) int16 {
 	return joystickAxises[id][axis]
 }
 
+// Axisf returns the Axis value for a certain Joystick's Axis in float32.
+// The value returns a float32 number that goes from -1 to 1 usually to show how 'full' the analog trigger are pressed or how far the stick has gone
 func Axisf(id sdl.JoystickID, axis uint) float32 {
 	return float32(Axis(id, axis)) / 65536
 }
 
+// Button returns the Joystick's button state
 func Button(id sdl.JoystickID, button uint) bool {
 	return joystickButtons[id][button]
 }
 
+// Hat returns the Joystick's hat position.
+// Use the JOYSTICK_HAT_* constants to know what position it's on
 func Hat(id sdl.JoystickID, hat uint) uint8 {
 	return joystickHats[id][hat]
 }
 
+// MouseLocation returns the mouse location relative to the window in a 2D Vector
 func MouseLocation() vec2.T {
 	return mouseLocation
 }
 
+// Mouse returns the state of a mouse button.
+// Use the MOUSE_* constants to know what button it is
 func Mouse(button uint8) bool {
 	return mouseState[button]
 }
 
+// Key returns the state of a keyboard button
 func Key(key sdl.Scancode) bool {
 	keyState := sdl.GetKeyboardState()
 
@@ -143,6 +159,7 @@ func Key(key sdl.Scancode) bool {
 	}
 }
 
+// Clean removes every used joystick
 func Clean() {
 	for k := range joysticks {
 		remJoystick(k)
