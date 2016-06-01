@@ -1,3 +1,4 @@
+// Package input provides functions that can be used to handle input devices on your game
 package input
 
 import (
