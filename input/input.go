@@ -38,7 +38,7 @@ const (
 	JOYSTICK_HAT_NW = 12
 )
 
-// Init initializes the Joystick Subsystem and add available joysticks
+// InitJoystick initializes the Joystick Subsystem and add available joysticks
 func InitJoystick() {
 	if sdl.WasInit(sdl.INIT_JOYSTICK) == 0 {
 		sdl.InitSubSystem(sdl.INIT_JOYSTICK)
