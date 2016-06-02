@@ -52,7 +52,7 @@ func (t *Tileset) DrawTile(renderer *sdl.Renderer, x, y int32, tile int) {
 		return
 	}
 
-	row := int32(math.Ceil(float64(tile/t.Columns)) - 1)
+	row := int32(math.Ceil(float64(tile/t.Columns))) + 1
 	frame := tile % t.Columns
 
 	texture.DrawFrame(renderer, t.Name, x, y,

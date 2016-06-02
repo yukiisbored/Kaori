@@ -35,6 +35,7 @@ func (s *DemoScene) Enter() {
 		log.Panic(err)
 	}
 
+	s.testMap = new(tilemap.Map)
 	err = tilemap.Unmarshal(data, s.testMap)
 
 	if err != nil {
@@ -63,8 +64,9 @@ func (s *DemoScene) Draw(r *sdl.Renderer) {
 	// Rotate the logo relatively to how long it's been running
 	rot := tick * 4 % 360
 
-	// Render Map
-	//s.testMap.Draw(r, 0, 0)
+	// Draw Map
+
+	s.testMap.Draw(r, 0, -800)
 
 	// Draw the logos!
 	texture.Draw(renderer, "kaori",
