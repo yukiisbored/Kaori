@@ -66,7 +66,7 @@ func Init(title string, x, y, width, height int, fullscreen bool) {
 	window = win
 	renderer = ren
 
-	input.Init()
+	input.InitJoystick()
 
 	running = true
 
