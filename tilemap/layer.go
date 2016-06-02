@@ -4,9 +4,13 @@ import (
 	"encoding/csv"
 	"strconv"
 	"strings"
+
+	"github.com/veandco/go-sdl2/sdl"
 )
 
 type Layer struct {
+	Parent *Map
+
 	Name string `xml:"name,attr"`
 
 	Width  int `xml:"width,attr"`
@@ -17,7 +21,7 @@ type Layer struct {
 
 	Data *Data `xml:"data"`
 
-	Tiles [][]int
+	Tiles [][]int `xml:"-"`
 }
 
 type Data struct {
@@ -64,4 +68,23 @@ func (l *Layer) Read() error {
 	}
 
 	return nil
+}
+
+func (l *Layer) Draw(renderer *sdl.Renderer, x, y int32) {
+	for yTile, r := range l.Tiles {
+		for xTile, t := range r {
+			var tileset *Tileset
+
+			for _, ts := range l.Parent.Tilesets {
+				if t < ts.FirstID {
+					continue
+				}
+
+				tileset = ts
+				return
+			}
+
+			tileset.DrawTile(renderer, x+int32(xTile*tileset.TileWidth), y+int32(yTile*tileset.TileHeight), t)
+		}
+	}
 }
