@@ -15,6 +15,8 @@ const DELAY_TIME = 1000 / FPS // How long should we delay to get 60 frames in ev
 var frameStart, frameTime uint32 // When did the frame start and How long does it take to do a game update and render
 
 func main() {
+	runtime.LockOSThread()
+
 	// Show us a welomce message
 	log.Println("Welcome to Kaori")
 
