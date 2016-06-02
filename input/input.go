@@ -39,7 +39,7 @@ const (
 )
 
 // Init initializes the Joystick Subsystem and add available joysticks
-func Init() {
+func InitJoystick() {
 	if sdl.WasInit(sdl.INIT_JOYSTICK) == 0 {
 		sdl.InitSubSystem(sdl.INIT_JOYSTICK)
 	}
