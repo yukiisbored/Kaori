@@ -1,14 +1,17 @@
 package game
 
 import (
+	"io/ioutil"
 	"log"
 
 	"github.com/veandco/go-sdl2/sdl"
 	"github.com/yukiisbored/Kaori/texture"
+	"github.com/yukiisbored/Kaori/tilemap"
 )
 
 // Demo Scene is an example use of a Scene in this case drawing the logo
 type DemoScene struct {
+	testMap *tilemap.Map
 }
 
 func (s *DemoScene) Enter() {
@@ -22,6 +25,25 @@ func (s *DemoScene) Enter() {
 	if err != nil {
 		log.Fatalln("Demo // Oh no, can't load logo :(")
 		log.Panic(err)
+	}
+
+	// Load the map file
+	data, err := ioutil.ReadFile("./assets/map.tmx")
+
+	if err != nil {
+		log.Fatalln("Demo // Oh no, can't load map :(")
+		log.Panic(err)
+	}
+
+	err = tilemap.Unmarshal(data, s.testMap)
+
+	if err != nil {
+		log.Fatalln("Demo // Oh no, can't parse map :(")
+		log.Panic(err)
+	}
+
+	for _, ts := range s.testMap.Tilesets {
+		ts.Load(renderer, "./assets")
 	}
 }
 
@@ -40,6 +62,9 @@ func (s *DemoScene) Draw(r *sdl.Renderer) {
 
 	// Rotate the logo relatively to how long it's been running
 	rot := tick * 4 % 360
+
+	// Render Map
+	//s.testMap.Draw(r, 0, 0)
 
 	// Draw the logos!
 	texture.Draw(renderer, "kaori",
