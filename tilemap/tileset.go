@@ -20,6 +20,8 @@ type Tileset struct {
 	Spacing int `xml:"spacing,attr"`
 	Margin  int `xml:"margin,attr"`
 
+	FirstID int `xml:"firstgid,attr"`
+
 	Image Image `xml:"image"`
 }
 
@@ -42,12 +44,13 @@ func (t *Tileset) Free() {
 }
 
 func (t *Tileset) DrawTile(renderer *sdl.Renderer, x, y int32, tile int) {
-	if tile == 0 {
+	// Subtract the value by the tileset's first id
+	tile = tile - t.FirstID
+
+	// Just ignore when it's lower than 0
+	if tile < 0 {
 		return
 	}
-
-	// Decrement value to make it easier
-	tile = tile - 1
 
 	row := int32(math.Ceil(float64(tile/t.Columns)) - 1)
 	frame := tile % t.Columns
