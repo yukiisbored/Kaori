@@ -76,9 +76,6 @@ func Init(title string, x, y, width, height int, fullscreen bool) {
 // Render is used for drawing something to the renderer. Which will show
 // up on the screen.
 func Render() {
-	tick++
-	log.Printf("RENDER TEST %d\n", tick)
-
 	renderer.Clear()
 
 	currentScene.Draw(renderer)
@@ -90,7 +87,6 @@ func Render() {
 // Moving the enemy, Update the score, Do physics, etc.
 func Update() {
 	tick++
-	log.Printf("TICK TEST %d\n", tick)
 
 	currentScene.Update()
 }
