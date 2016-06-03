@@ -9,12 +9,19 @@ import (
 	"github.com/yukiisbored/Kaori/game"
 )
 
-const FPS = 60                // Limit the FPS to 60
-const DELAY_TIME = 1000 / FPS // How long should we delay to get 60 frames in every second
+// The FPS Limit of the game
+const FPS = 60
 
-var frameStart, frameTime uint32 // When did the frame start and How long does it take to do a game update and render
+// The delay time needed to limit the FPS
+const DELAY_TIME = 1000 / FPS
+
+// When did the frame start and How long does it take to do a game update and render
+var frameStart, frameTime uint32
 
 func main() {
+	// Run the game on main thread only.
+	// This is important because SDL will freeze / crash
+	// if an action is running outside the main thread
 	runtime.LockOSThread()
 
 	// Show us a welomce message
