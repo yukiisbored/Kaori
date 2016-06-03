@@ -1,4 +1,4 @@
-// Scene provides an interface for scenes
+// Package Scene provides an interface for scenes
 package scene
 
 import "github.com/yukiisbored/Kaori/common"
