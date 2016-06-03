@@ -8,6 +8,7 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
+// Layer is a structure for TMX Tilemap Layers
 type Layer struct {
 	Parent *Map
 
@@ -24,6 +25,7 @@ type Layer struct {
 	Tiles [][]int `xml:"-"`
 }
 
+// Data is a structure for Layer's Tile Data
 type Data struct {
 	Encoding    string `xml:"encoding,attr"`
 	Compression string `xml:"compression,attr"`
@@ -31,6 +33,7 @@ type Data struct {
 	Data string `xml:",chardata"`
 }
 
+// Read parses the layer's tile data into two dimension array of integers
 func (l *Layer) Read() error {
 	// Support CSV for now
 	// TODO: XML, base64, base64 + zlib
@@ -76,21 +79,20 @@ func readCSV(l *Layer) error {
 	return nil
 }
 
+// Draw draws the layer to the renderer with the starting location of x and y
 func (l *Layer) Draw(renderer *sdl.Renderer, x, y int32) {
 	for yTile, r := range l.Tiles {
 		for xTile, t := range r {
 			var tileset *Tileset = l.Parent.Tilesets[0]
 
-			/*
-				for _, ts := range l.Parent.Tilesets {
-					if ts.FirstID > t {
-						continue
-					}
-
-					tileset = ts
-					return
+			for _, ts := range l.Parent.Tilesets {
+				if ts.FirstID > t {
+					continue
 				}
-			*/
+
+				tileset = ts
+				return
+			}
 
 			tileset.DrawTile(renderer, x+int32(xTile*tileset.TileWidth), y+int32(yTile*tileset.TileHeight), t)
 		}
