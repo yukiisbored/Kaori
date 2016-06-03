@@ -7,6 +7,7 @@ import (
 	"github.com/yukiisbored/Kaori/texture"
 )
 
+// Tileset is a set of sprites or textures for the tiled map
 type Tileset struct {
 	Name string `xml:"name,attr"`
 
@@ -25,6 +26,7 @@ type Tileset struct {
 	Image Image `xml:"image"`
 }
 
+// Image is the actual image for the spritesheet or texture
 type Image struct {
 	Source string `xml:"source,attr"`
 
@@ -32,6 +34,7 @@ type Image struct {
 	Height int `xml:"height,attr"`
 }
 
+// Load loads the image needed as an SDL Texture via Kaori's texture package
 func (t *Tileset) Load(renderer *sdl.Renderer, folder string) error {
 	fileName := t.Image.Source
 	path := folder + "/" + fileName
@@ -39,20 +42,23 @@ func (t *Tileset) Load(renderer *sdl.Renderer, folder string) error {
 	return texture.Load(renderer, path, t.Name)
 }
 
+// Free free the loaded image texture
 func (t *Tileset) Free() {
 	texture.Free(t.Name)
 }
 
+// Draw Tile draw a specific tile to the renderer at a specific location
+// The tile number is a continuous number starting from the tile set's first id
 func (t *Tileset) DrawTile(renderer *sdl.Renderer, x, y int32, tile int) {
 	// Subtract the value by the tileset's first id
-	tile = tile - t.FirstID
+	tile = tile - t.FirstID + 1
 
 	// Just ignore when it's lower than 0
 	if tile < 0 {
 		return
 	}
 
-	row := int32(math.Ceil(float64(tile/t.Columns))) + 1
+	row := int32(math.Ceil(float64(tile / t.Columns)))
 	frame := tile % t.Columns
 
 	texture.DrawFrame(renderer, t.Name, x, y,
