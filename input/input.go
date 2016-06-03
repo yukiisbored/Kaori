@@ -22,19 +22,41 @@ var (
 )
 
 const (
-	// Constants for Mouse buttons
-	MOUSE_LEFT   = 0
-	MOUSE_MIDDLE = 1
-	MOUSE_RIGHT  = 2
+	// Mouse Button Constants
 
-	// Constants for Joystick Hat positions
-	JOYSTICK_HAT_N  = 1
+	// Value for Left Mouse Button
+	MOUSE_LEFT = 0
+
+	// Value for Middle Mouse BUtton
+	MOUSE_MIDDLE = 1
+
+	// Value for Right Mouse Button
+	MOUSE_RIGHT = 2
+
+	// Joystick Hat Position Constant
+
+	// Value for North Joystick Hat Position
+	JOYSTICK_HAT_N = 1
+
+	// Value for North-East Joystick Hat Position
 	JOYSTICK_HAT_NE = 3
-	JOYSTICK_HAT_E  = 2
+
+	// Value for East Joystick Hat Position
+	JOYSTICK_HAT_E = 2
+
+	// Value for South-East Joystick Hat Position
 	JOYSTICK_HAT_SE = 6
-	JOYSTICK_HAT_S  = 4
+
+	// Value for South Joystick Position
+	JOYSTICK_HAT_S = 4
+
+	// Value for South-West Joystick Hat Position
 	JOYSTICK_HAT_SW = 9
-	JOYSTICK_HAT_W  = 8
+
+	// Value for West Joystick Hat Position
+	JOYSTICK_HAT_W = 8
+
+	// Value for North-West Joystick Hat Position
 	JOYSTICK_HAT_NW = 12
 )
 
@@ -155,9 +177,9 @@ func Key(key sdl.Scancode) bool {
 
 	if keyState[key] == 1 {
 		return true
-	} else {
-		return false
 	}
+
+	return false
 }
 
 // Clean removes every used joystick
