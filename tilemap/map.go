@@ -1,3 +1,4 @@
+// Package tilemap is a TMX format Tilemap Parser and Renderer for Kaori
 package tilemap
 
 import (
@@ -6,6 +7,7 @@ import (
 	"github.com/veandco/go-sdl2/sdl"
 )
 
+// Map is the actual TMX map structure
 type Map struct {
 	XMLName xml.Name `xml:"map"`
 
@@ -24,6 +26,7 @@ type Map struct {
 	ObjectGroups []*ObjectGroup `xml:"objectgroup"`
 }
 
+// Unmarshal parses TMX formatted Tilemap data into a Map structure
 func Unmarshal(data []byte, tilemap *Map) error {
 	err := xml.Unmarshal(data, tilemap)
 
@@ -40,10 +43,12 @@ func Unmarshal(data []byte, tilemap *Map) error {
 	return err
 }
 
+// Marshal parses the Map structure into a TMX formatted Tilemap data
 func Marshal(tilemap *Map) ([]byte, error) {
 	return xml.Marshal(tilemap)
 }
 
+// Draw draws the Map with the renderer starting at the provided location
 func (m *Map) Draw(renderer *sdl.Renderer, x, y int32) {
 	for _, l := range m.Layers {
 		l.Draw(renderer, x, y)
