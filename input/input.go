@@ -24,39 +24,39 @@ var (
 const (
 	// Mouse Button Constants
 
-	// Value for Left Mouse Button
+	// MOUSE_LEFT is the value for the left mouse button
 	MOUSE_LEFT = 0
 
-	// Value for Middle Mouse BUtton
+	// MOUSE_MIDDLE is the value for the middle mouse button ( aka the scrollwheel )
 	MOUSE_MIDDLE = 1
 
-	// Value for Right Mouse Button
+	// MOUSE_RIGHT is the value for the right mouse button
 	MOUSE_RIGHT = 2
 
-	// Joystick Hat Position Constant
+	// Joystick Hat Position Constants
 
-	// Value for North Joystick Hat Position
+	// JOYSTICK_HAT_N is the value for the north joystick hat position
 	JOYSTICK_HAT_N = 1
 
-	// Value for North-East Joystick Hat Position
+	// JOYSTICK_HAT_NE is the value for the north east joystick hat position
 	JOYSTICK_HAT_NE = 3
 
-	// Value for East Joystick Hat Position
+	// JOYSTICK_HAT_E is the value for the east joystick hat position
 	JOYSTICK_HAT_E = 2
 
-	// Value for South-East Joystick Hat Position
+	// JOYSTICK_HAT_SE is the value for the south east joystick hat position
 	JOYSTICK_HAT_SE = 6
 
-	// Value for South Joystick Position
+	// JOYSTICK_HAT_S is the value for the south joystick hat position
 	JOYSTICK_HAT_S = 4
 
-	// Value for South-West Joystick Hat Position
+	// JOYSTICK_HAT_SW is the value for the south east joystick hat position
 	JOYSTICK_HAT_SW = 9
 
-	// Value for West Joystick Hat Position
+	// JOYSTICK_HAT_W is the value for the west joystick hat position
 	JOYSTICK_HAT_W = 8
 
-	// Value for North-West Joystick Hat Position
+	// JOYSTICK_HAT_NW is the value for the north west joystick hat position
 	JOYSTICK_HAT_NW = 12
 )
 
