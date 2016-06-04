@@ -84,56 +84,85 @@ func InitJoystick() {
 func HandleEvents(e sdl.Event) {
 	switch t := e.(type) {
 	case *sdl.JoyDeviceEvent:
-		if t.Type == sdl.JOYDEVICEADDED {
-			addJoystick(t.Which)
-		} else if t.Type == sdl.JOYDEVICEREMOVED {
-			remJoystick(t.Which)
-		}
+		handleJoyDeviceEvent(t)
 		break
 	case *sdl.JoyAxisEvent:
-		joystickAxises[t.Which][t.Axis] = t.Value
+		handleJoyAxisEvent(t)
 		break
 	case *sdl.JoyButtonEvent:
-		if t.State == 1 {
-			joystickButtons[t.Which][t.Button] = true
-		} else {
-			joystickButtons[t.Which][t.Button] = false
-		}
+		handleJoyButtonEvent(t)
 		break
 	case *sdl.JoyHatEvent:
-		joystickHats[t.Which][t.Hat] = t.Value
+		handleJoyHatEvent(t)
 		break
 	case *sdl.MouseMotionEvent:
-		mouseLocation[0] = float32(t.X)
-		mouseLocation[1] = float32(t.Y)
+		handleMouseMotionEvent(t)
 		break
 	case *sdl.MouseButtonEvent:
-		if t.Type == sdl.MOUSEBUTTONDOWN {
-			if t.Button == sdl.BUTTON_LEFT {
-				mouseState[MOUSE_LEFT] = true
-			}
-
-			if t.Button == sdl.BUTTON_MIDDLE {
-				mouseState[MOUSE_MIDDLE] = true
-			}
-
-			if t.Button == sdl.BUTTON_RIGHT {
-				mouseState[MOUSE_RIGHT] = true
-			}
-		} else {
-			if t.Button == sdl.BUTTON_LEFT {
-				mouseState[MOUSE_LEFT] = false
-			}
-
-			if t.Button == sdl.BUTTON_MIDDLE {
-				mouseState[MOUSE_MIDDLE] = false
-			}
-
-			if t.Button == sdl.BUTTON_RIGHT {
-				mouseState[MOUSE_RIGHT] = false
-			}
-		}
+		handleMouseButtonEvent(t)
 		break
+	}
+}
+
+// Joystick Event Handlers
+
+func handleJoyDeviceEvent(t *sdl.JoyDeviceEvent) {
+	if t.Type == sdl.JOYDEVICEADDED {
+		addJoystick(t.Which)
+	} else if t.Type == sdl.JOYDEVICEREMOVED {
+		remJoystick(t.Which)
+	}
+
+}
+
+func handleJoyAxisEvent(t *sdl.JoyAxisEvent) {
+	joystickAxises[t.Which][t.Axis] = t.Value
+}
+
+func handleJoyButtonEvent(t *sdl.JoyButtonEvent) {
+	if t.State == 1 {
+		joystickButtons[t.Which][t.Button] = true
+	} else {
+		joystickButtons[t.Which][t.Button] = false
+	}
+}
+
+func handleJoyHatEvent(t *sdl.JoyHatEvent) {
+	joystickHats[t.Which][t.Hat] = t.Value
+}
+
+// Mouse Event Handlers
+
+func handleMouseMotionEvent(t *sdl.MouseMotionEvent) {
+	mouseLocation[0] = float32(t.X)
+	mouseLocation[1] = float32(t.Y)
+}
+
+func handleMouseButtonEvent(t *sdl.MouseButtonEvent) {
+	if t.Type == sdl.MOUSEBUTTONDOWN {
+		if t.Button == sdl.BUTTON_LEFT {
+			mouseState[MOUSE_LEFT] = true
+		}
+
+		if t.Button == sdl.BUTTON_MIDDLE {
+			mouseState[MOUSE_MIDDLE] = true
+		}
+
+		if t.Button == sdl.BUTTON_RIGHT {
+			mouseState[MOUSE_RIGHT] = true
+		}
+	} else {
+		if t.Button == sdl.BUTTON_LEFT {
+			mouseState[MOUSE_LEFT] = false
+		}
+
+		if t.Button == sdl.BUTTON_MIDDLE {
+			mouseState[MOUSE_MIDDLE] = false
+		}
+
+		if t.Button == sdl.BUTTON_RIGHT {
+			mouseState[MOUSE_RIGHT] = false
+		}
 	}
 }
 
