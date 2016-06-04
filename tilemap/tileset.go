@@ -47,7 +47,7 @@ func (t *Tileset) Free() {
 	texture.Free(t.Name)
 }
 
-// Draw Tile draw a specific tile to the renderer at a specific location
+// DrawTile draw a specific tile to the renderer at a specific location
 // The tile number is a continuous number starting from the tile set's first id
 func (t *Tileset) DrawTile(renderer *sdl.Renderer, x, y int32, tile int) {
 	// Subtract the value by the tileset's first id
