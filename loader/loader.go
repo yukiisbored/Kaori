@@ -9,10 +9,10 @@ import (
 	"github.com/yukiisbored/Kaori/game"
 )
 
-// The FPS Limit of the game
+// FPS is the FPS limit of the game
 const FPS = 60
 
-// The delay time needed to limit the FPS
+// DELAY_TIME is the delay time needed to limit the FPS
 const DELAY_TIME = 1000 / FPS
 
 // When did the frame start and How long does it take to do a game update and render
