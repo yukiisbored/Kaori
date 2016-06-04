@@ -1,5 +1,8 @@
 <div align="center">
 	<img src="https://raw.githubusercontent.com/yukiisbored/Kaori/master/assets/kaori.png">
+	<div>
+		<img src="https://goreportcard.com/badge/github.com/yukiisbored/Kaori">
+	</div>
 </div>
 
 ## What is this?
