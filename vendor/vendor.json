@@ -1,0 +1,37 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "f9ce67tJTKyE3Nc1muLgAYoSqYM=",
+			"path": "github.com/ungerik/go3d/generic",
+			"revision": "b765e791b61c6db0b9ff62072092d28395aeb106",
+			"revisionTime": "2015-04-05T21:01:24Z"
+		},
+		{
+			"checksumSHA1": "CS2urkLjayAmTcs4c56ZrKeqlh0=",
+			"path": "github.com/ungerik/go3d/mat2",
+			"revision": "b765e791b61c6db0b9ff62072092d28395aeb106",
+			"revisionTime": "2015-04-05T21:01:24Z"
+		},
+		{
+			"checksumSHA1": "O+CEs1GAEQVKMpQ861A5g0xefIM=",
+			"path": "github.com/ungerik/go3d/vec2",
+			"revision": "b765e791b61c6db0b9ff62072092d28395aeb106",
+			"revisionTime": "2015-04-05T21:01:24Z"
+		},
+		{
+			"checksumSHA1": "S10q7buBUHtX/wOi6DyGXYWkGB4=",
+			"path": "github.com/veandco/go-sdl2/sdl",
+			"revision": "acaa5e7814bee505935e910e4751ff793e24aafb",
+			"revisionTime": "2016-05-06T14:14:06Z"
+		},
+		{
+			"checksumSHA1": "/rMefrICN8uOQsB8zqjJ0aemXpk=",
+			"path": "github.com/veandco/go-sdl2/sdl_image",
+			"revision": "acaa5e7814bee505935e910e4751ff793e24aafb",
+			"revisionTime": "2016-05-06T14:14:06Z"
+		}
+	],
+	"rootPath": "github.com/yukiisbored/Kaori"
+}
