@@ -10,7 +10,7 @@ This is a game framework that I wrote in Go. It focuses on flexibility, simplici
 ## Contact
 Want to suggest a Feature? Want to correct my mistake? Do you think my code is horrible?
 * Twitter: [@yuki\_is\_bored](https://twitter.com/yuki_is_bored)
-* Email: [yukiisbest@waifu.club](mailto:yukiisbest@waifu.club)
+* Email: [ykno@protonmail.com](mailto:ykno@protonmail.com)
 * Telegram: [@yuki\_is\_bored](https://telegram.me/yuki_is_bored)
 
 Thanks,
